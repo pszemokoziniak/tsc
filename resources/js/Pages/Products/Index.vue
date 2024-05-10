@@ -70,7 +70,7 @@ export default {
     form: {
       deep: true,
       handler: throttle(function() {
-        this.$inertia.get('/products', pickBy(this.form), { preserveState: true })
+        this.$inertia.get('/', pickBy(this.form), { preserveState: true })
       }, 150),
     },
   },

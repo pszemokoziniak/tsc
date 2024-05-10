@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsStoreRequest;
 use App\Imports\ProductsImport;
 use App\Models\Product;
 
@@ -16,7 +17,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
         return Inertia::render('Products/Index', [
             'filters' => Request::all('search'),
             'products' => Product::filter(Request::only('search'))->get(),
@@ -28,7 +28,7 @@ class ProductController extends Controller
         return Inertia::render('Products/Store');
     }
 
-    public function store(\Illuminate\Http\Request $request)
+    public function store(ProductsStoreRequest $request)
     {
         $request->validate([
             'file' => 'required|file|mimes:xls,xlsx'
